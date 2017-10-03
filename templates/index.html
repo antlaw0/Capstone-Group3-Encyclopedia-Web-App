@@ -1,5 +1,7 @@
 <!DOCTYPE HTML>
 <html>
+  
+  
   <head>
     <title>Encyclopedia</title>
   </head>
@@ -12,15 +14,30 @@
     <br>
 	
 	<div>
-	<button id="tab1">Wikipedia</button>
-	<button id="tab2">Flickr</button>
+	<button id="tab1" onclick="display_wikipedia">Wikipedia</button>
+	<button id="tab2" onclick="display_flickr">Flickr</button>
 	<button id="tab3">Twitter</button>
 	</div>
 	</center>
 	
 	{% if wikiText %}
-      <img src={{wikiImage}}></img>
-	  {{wikiText}}!
-    {% endif %}
+      <div id="flickrElement">
+	  Flickr:
+		<br>
+	  <img src={{flickrImage}} height="50%" width="50%"></img>
+	  <br>
+	  <img src={{flickrImage2}} height="50%" width="50%"></img>
+	  </div>
+	  <div id="wikiElement">
+	  Wikipedia:
+	  <br>
+	  <img src={{wikiImage}} height="50%" width="50%"></img>
+	  <br>
+	  </div>
+	  
+	  {{wikiText}}
+	  </div>
+	   {%endif %}
   </body>
 </html>
+  
