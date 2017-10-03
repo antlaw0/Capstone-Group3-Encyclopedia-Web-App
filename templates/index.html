@@ -1,4 +1,4 @@
-<!DOCTYPE HTML>
+<!--<!DOCTYPE HTML>
 <html>
   <head>
     <title>Encyclopedia</title>
@@ -31,5 +31,67 @@
 
 
 
+  </body>
+</html>-->
+<!DOCTYPE HTML>
+<html>
+
+
+  <head>
+    <title>Encyclopedia</title>
+  </head>
+  <body>
+    <center>
+	<form method="POST" action="">
+      Enter search term: <input type="text" name="searchText">
+      <input type="submit" name="submit" value="Submit">
+    </form>
+    <br>
+
+	<div>
+	<button id="tab1" onclick="wikiFunction()">Wikipedia</button>
+	<button id="tab2" onclick="flickrFunction()">Flickr</button>
+	<button id="tab3">Twitter</button>
+	</div>
+	</center>
+
+	{% if wikiText %}
+      <div id="flickrElement">
+	  Flickr:
+		<br>
+	  <img src={{flickrImage}} height="50%" width="50%"></img>
+	  <br>
+	  <img src={{flickrImage2}} height="50%" width="50%"></img>
+	  </div>
+	  <div id="wikiElement">
+	  Wikipedia:
+	  <br>
+	  <img src={{wikiImage}} height="50%" width="50%"></img>
+	  <br>
+
+
+	  {{wikiText}}
+	  </div>
+	   {%endif %}
+
+  <script>
+       function flickrFunction(){
+          var x = document.getElementById("wikiElement");
+          var y = document.getElementById("flickrElement");
+
+           x.style.display = "none"
+           y.style.display = "block"
+
+      }
+      function wikiFunction(){
+          var x = document.getElementById("wikiElement");
+          var y = document.getElementById("flickrElement");
+
+           x.style.display = "block"
+           y.style.display = "none"
+
+      }
+
+  </script>
   </body>
 </html>
