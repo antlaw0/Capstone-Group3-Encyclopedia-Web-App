@@ -12,14 +12,24 @@
     <br>
 
 	<div>
-	<button id="tab1">Wikipedia</button>
-	<button id="tab2">Flickr</button>
+        <form action="/wiki" method="post">
+	        <button id="tab1" type="submit">Wikipedia</button>
+        </form>
+        <form action="/flickr" method="post">
+	        <button id="tab2" type="submit">Flickr</button>
+
+        </form>
 	<button id="tab3">Twitter</button>
+        <img src={{ flickrImage }}>
+        <img src={{ flickrImage2 }}>
+
+	    {{wikiText}}
+
 	</div>
 	</center>
 
-	<img src={{ flickrImage }}>
-    <img src={{ flickrImage2 }}>
+
+
 
   </body>
 </html>
