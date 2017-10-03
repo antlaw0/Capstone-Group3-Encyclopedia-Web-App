@@ -17,10 +17,10 @@ def index():
         flickr = FlickrAPI(FLICKR_PUBLIC, FLICKR_SECRET, format='parsed-json')
         extras = 'url_c,url_l,url_o'
         results = flickr.photos.search(text=searchText, per_page=5, extras=extras)
-        fetchPhotoURL = results['photos']['photo'][0]['url_c']
-        fetchPhotoURL2 = results['photos']['photo'][1]['url_c']
+        flickrImage = results['photos']['photo'][0]['url_c']
+        flickrImage2 = results['photos']['photo'][1]['url_c']
 
-    return render_template('index.html', flickrImage=fetchPhotoURL, flickrImage2=fetchPhotoURL2)
+    return render_template('index.html', flickrImage=flickrImage, flickrImage2=flickrImage2)
 
 
 if __name__ == '__main__':
