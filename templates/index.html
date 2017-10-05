@@ -1,0 +1,115 @@
+<!--<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Encyclopedia</title>
+  </head>
+  <body>
+    <center>
+	<form method="POST" action="">
+      Enter search term: <input type="text" name="searchText">
+      <input type="submit" name="submit" value="Submit">
+    </form>
+    <br>
+
+	<div>
+        <form action="/wiki" method="post">
+	        <button id="tab1" type="submit">Wikipedia</button>
+        </form>
+        <form action="/flickr" method="post">
+	        <button id="tab2" type="submit">Flickr</button>
+
+        </form>
+	<button id="tab3">Twitter</button>
+        <img src={{ flickrImage }}>
+        <img src={{ flickrImage2 }}>
+
+	    {{wikiText}}
+
+	</div>
+	</center>
+
+
+
+
+  </body>
+</html>-->
+<!DOCTYPE HTML>
+<html>
+
+
+  <head>
+    <title>Encyclopedia</title>
+  </head>
+  <body>
+    <center>
+	<form method="POST" action="">
+      Enter search term: <input type="text" name="searchText">
+      <input type="submit" name="submit" value="Submit">
+    </form>
+    <br>
+
+	<div>
+	<button id="tab1" onclick="wikiFunction()">Wikipedia</button>
+	<button id="tab2" onclick="flickrFunction()">Flickr</button>
+	<button id="tab3" onclick="twitterFunction()">Twitter</button>
+	</div>
+	</center>
+
+	{% if wikiText %}
+      <div id="flickrElement">
+	  Flickr:
+		<br>
+	  <img src={{flickrImage}} height="50%" width="50%"></img>
+	  <br>
+	  <img src={{flickrImage2}} height="50%" width="50%"></img>
+	  </div>
+	  <div id="wikiElement">
+	  Wikipedia:
+	  <br>
+	  <img src={{wikiImage}} height="50%" width="50%"></img>
+	  <br>
+
+
+	  {{wikiText}}
+	  </div>
+        <div id="twitterElement">
+        {{ twitterText }}
+        </div>
+	   {%endif %}
+
+  <script>
+       function flickrFunction(){
+          var w = document.getElementById("wikiElement");
+          var f = document.getElementById("flickrElement");
+          var t = document.getElementById("twitterElement");
+
+           w.style.display = "none";
+           f.style.display = "block"
+           t.style.display = "none";
+
+
+
+      }
+      function wikiFunction(){
+          var w = document.getElementById("wikiElement");
+          var f = document.getElementById("flickrElement");
+          var t = document.getElementById("twitterElement");
+           w.style.display = "block"
+           f.style.display = "none"
+           t.style.display = "none";
+
+      }
+      function twitterFunction(){
+          var w = document.getElementById("wikiElement");
+          var f = document.getElementById("flickrElement");
+          var t = document.getElementById("twitterElement");
+
+           w.style.display = "none"
+           t.style.display = "block"
+           f.style.display = "none"
+
+      }
+
+  </script>
+  </body>
+</html>
