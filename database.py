@@ -22,6 +22,7 @@ conn.execute("CREATE TABLE TWITTER"
          '(SEARCH_TERM TEXT PRIMARY KEY     NOT NULL,'
          'URL          TEXT    NOT NULL)')
 print ("TWITTER Table created successfully")
+print()
 
 conn.commit() #commit the update
 conn.close()#close the call
