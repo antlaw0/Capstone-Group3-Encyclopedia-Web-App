@@ -54,7 +54,10 @@ def get_result(api_raw, search_text):
                 title = str(rslt['title'])
                 if len(title) > 0:
                     lines = title.splitlines()
+                    result_text.append(lines[0])
                     print(lines[0])
+                else:
+                    result_text.append("")
 
     return result_text,result_images
 
