@@ -10,7 +10,7 @@ import os
 
 def get_result(api_raw, search_text):
 
-    result_text = ""
+    result_text = []
     result_images = []
 
     api_raw = str(api_raw)
@@ -21,25 +21,28 @@ def get_result(api_raw, search_text):
         ACCESS_SECRET = os.environ['ACCESS_SECRET']
         CONSUMER_KEY = os.environ['CONSUMER_KEY']
         CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
-        
         auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
         auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
         api = tweepy.API(auth)
         twitter_search = api.search(search_text)
-        for b in twitter_search:
-            result_text += b.text
+        for result in twitter_search:
+            result_text.append(result.text)
     elif api == 1:
         # Wikipedia
-        wikiPage = wikipedia.page(search_text)
-        result_text = wikiPage.summary
-        result_images = wikiPage.images
+        try:
+            wikiPage = wikipedia.page(search_text)
+            result_text.append(wikiPage.summary)
+            result_images = wikiPage.images
+        except wikipedia.WikipediaException:
+            result_text.append("Sorry, no page matched your search '" + search_text + "'.")
+            result_images.append(None)
     elif api == 2:
         # Flickr
         FLICKR_PUBLIC = os.environ['FLICKR_PUBLIC']
         FLICKR_SECRET = os.environ['FLICKR_SECRET']
         flickr = FlickrAPI(FLICKR_PUBLIC, FLICKR_SECRET, format='parsed-json')
         extras = 'url_c,url_l,url_o'
-        results = flickr.photos.getRecent(text=search_text, per_page=25, extras=extras)
+        results = flickr.photos.search(tags=search_text, per_page=25, extras=extras)
         for rslt in results['photos']['photo']:
             if 'url_l' in rslt:
                 result_images.append(rslt['url_l'])
@@ -47,6 +50,11 @@ def get_result(api_raw, search_text):
                 result_images.append(rslt['url_c'])
             elif 'url_o' in rslt:
                 result_images.append(rslt['url_o'])
+            if 'title' in rslt:
+                title = str(rslt['title'])
+                if len(title) > 0:
+                    lines = title.splitlines()
+                    print(lines[0])
 
     return result_text,result_images
 
