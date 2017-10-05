@@ -22,21 +22,25 @@ def index():
         wikiText = wikiPage.content
         wikiImage = wikiPage.images[0]
 
-        FLICKR_PUBLIC = '2996c5433c7c633978adb98583ac21fd'  # os.environ['FLICKR_PUBLIC']
-        FLICKR_SECRET = 'Ydbfbfec07e8f9c22'  # os.environ['FLICKR_SECRET']
+        FLICKR_PUBLIC =  os.environ['FLICKR_PUBLIC']
+        FLICKR_SECRET =  os.environ['FLICKR_SECRET']
         flickr = FlickrAPI(FLICKR_PUBLIC, FLICKR_SECRET, format='parsed-json')
         extras = 'url_c,url_l,url_o'
         results = flickr.photos.getRecent(text=searchText, per_page=5, extras=extras)
+        #making sure urls are availbe to show photos
         if 'url_l' in results['photos']['photo'][0]:
             flickrImage = results['photos']['photo'][0]['url_l']
         elif 'url_c' in results['photos']['photo'][0]:
             flickrImage = results['photos']['photo'][0]['url_c']
+        elif 'url_o' in results['photos']['photo'][0]:
+            flickrImage = results['photos']['photo'][0]['url_o']
 
-        flickrImage2 = results['photos']['photo'][1]['url_l']
-
-
-
-
+        if 'url_l' in results['photos']['photo'][1]:
+            flickrImage2 = results['photos']['photo'][1]['url_l']
+        elif 'url_c' in results['photos']['photo'][1]:
+            flickrImage2 = results['photos']['photo'][1]['url_l']
+        elif 'url_o' in results['photos']['photo'][1]:
+            flickrImage2 = results['photos']['photo'][1]['url_l']
 
         ACCESS_KEY =
         ACCESS_SECRET =
