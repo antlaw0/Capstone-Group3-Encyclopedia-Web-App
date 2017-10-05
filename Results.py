@@ -42,7 +42,7 @@ def get_result(api_raw, search_text):
         FLICKR_SECRET = os.environ['FLICKR_SECRET']
         flickr = FlickrAPI(FLICKR_PUBLIC, FLICKR_SECRET, format='parsed-json')
         extras = 'url_c,url_l,url_o'
-        results = flickr.photos.getRecent(text=search_text, per_page=25, extras=extras)
+        results = flickr.photos.search(tags=search_text, per_page=25, extras=extras)
         for rslt in results['photos']['photo']:
             if 'url_l' in rslt:
                 result_images.append(rslt['url_l'])
