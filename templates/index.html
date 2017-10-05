@@ -51,7 +51,7 @@
 	<div>
 	<button id="tab1" onclick="wikiFunction()">Wikipedia</button>
 	<button id="tab2" onclick="flickrFunction()">Flickr</button>
-	<button id="tab3">Twitter</button>
+	<button id="tab3" onclick="twitterFunction()">Twitter</button>
 	</div>
 	</center>
 
@@ -79,19 +79,34 @@
 
   <script>
        function flickrFunction(){
-          var x = document.getElementById("wikiElement");
-          var y = document.getElementById("flickrElement");
+          var w = document.getElementById("wikiElement");
+          var f = document.getElementById("flickrElement");
+          var t = document.getElementById("twitterElement");
 
-           x.style.display = "none"
-           y.style.display = "block"
+           w.style.display = "none";
+           f.style.display = "block"
+           t.style.display = "none";
+
+
 
       }
       function wikiFunction(){
-          var x = document.getElementById("wikiElement");
-          var y = document.getElementById("flickrElement");
+          var w = document.getElementById("wikiElement");
+          var f = document.getElementById("flickrElement");
+          var t = document.getElementById("twitterElement");
+           w.style.display = "block"
+           f.style.display = "none"
+           t.style.display = "none";
 
-           x.style.display = "block"
-           y.style.display = "none"
+      }
+      function twitterFunction(){
+          var w = document.getElementById("wikiElement");
+          var f = document.getElementById("flickrElement");
+          var t = document.getElementById("twitterElement");
+
+           w.style.display = "none"
+           t.style.display = "block"
+           f.style.display = "none"
 
       }
 
