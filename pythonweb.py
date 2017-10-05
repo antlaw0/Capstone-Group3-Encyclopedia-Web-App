@@ -4,6 +4,7 @@ from flask import Flask, render_template, request
 import os
 import tweepy
 app = Flask(__name__)
+from Results import get_result
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -18,41 +19,14 @@ def index():
     if request.method == 'POST' and 'searchText' in request.form:
         searchText = request.form['searchText']
 
-        wikiPage = wikipedia.page(searchText)
-        wikiText = wikiPage.content
-        wikiImage = wikiPage.images[0]
+        raw_flickr_text,raw_flickr_images = get_result("flickr", searchText)
+        flickrImage = raw_flickr_images[0]
+        flickrImage2 = raw_flickr_images[1]
 
-        FLICKR_PUBLIC =  os.environ['FLICKR_PUBLIC']
-        FLICKR_SECRET =  os.environ['FLICKR_SECRET']
-        flickr = FlickrAPI(FLICKR_PUBLIC, FLICKR_SECRET, format='parsed-json')
-        extras = 'url_c,url_l,url_o'
-        results = flickr.photos.getRecent(text=searchText, per_page=5, extras=extras)
-        #making sure urls are availbe to show photos
-        if 'url_l' in results['photos']['photo'][0]:
-            flickrImage = results['photos']['photo'][0]['url_l']
-        elif 'url_c' in results['photos']['photo'][0]:
-            flickrImage = results['photos']['photo'][0]['url_c']
-        elif 'url_o' in results['photos']['photo'][0]:
-            flickrImage = results['photos']['photo'][0]['url_o']
+        wikiText,raw_wiki_images = get_result("wikipedia", searchText)
+        wikiImage = raw_wiki_images[0]
 
-        if 'url_l' in results['photos']['photo'][1]:
-            flickrImage2 = results['photos']['photo'][1]['url_l']
-        elif 'url_c' in results['photos']['photo'][1]:
-            flickrImage2 = results['photos']['photo'][1]['url_l']
-        elif 'url_o' in results['photos']['photo'][1]:
-            flickrImage2 = results['photos']['photo'][1]['url_l']
-
-        ACCESS_KEY =
-        ACCESS_SECRET =
-        CONSUMER_KEY =
-        CONSUMER_SECRET =
-        auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
-        auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
-        api = tweepy.API(auth)
-        bannas = api.search(searchText)
-        twitterText = ""
-        for b in bannas:
-           twitterText += b.text
+        twitterText,raw_twitter_images = get_result("twitter", searchText)
 
     return render_template('index.html', flickrImage=flickrImage, flickrImage2=flickrImage2, wikiText=wikiText,
                            wikiImage=wikiImage, searchText=searchText, twitterText=twitterText)
