@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html>
+
+
+  <head>
+    <title>Encyclopedia</title>
+  </head>
+  <body>
+    <center>
+	<form method="POST" action="">
+      Enter search term: <input type="text" name="searchText">
+      <input type="submit" name="submit" value="Submit">
+    </form>
+    <br>
+
+	<div>
+	<button id="tab1">Wikipedia</button>
+	<button id="tab2"> Flickr</button>
+	<button id="tab3">Twitter</button>
+	</div>
+	</center>
+
+	{% if searchText %}
+      <div id="flickrElement">
+	  Flickr:
+		<br>
+	  <table>
+	  <tr>
+	  <td>
+	  <img src={{flickrImage}} height="50%" width="50%"></img>
+	  </td>
+	  <td>
+	  <img src={{flickrImage2}} height="50%" width="50%"></img>
+	  </td>
+	  </tr>
+	  </table>
+	  </div>
+	  <div id="wikiElement">
+	  Wikipedia:
+	  <br>
+	  <img src={{wikiImage}} height="50%" width="50%"></img>
+	  <br>
+
+
+	  {{wikiText}}
+	  </div>
+        <div id="twitterElement">
+        {{ twitterText }}
+        </div>
+	   {%endif %}
+
+</html>
