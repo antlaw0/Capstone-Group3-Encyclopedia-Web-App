@@ -1,8 +1,12 @@
 <!DOCTYPE HTML>
-<html>
 
-
+<style>
+body{
+background-color: lightBlue;
+}
+</style>
   <head>
+  
     <title>Encyclopedia</title>
   </head>
   <body>
@@ -14,39 +18,89 @@
     <br>
 
 	<div>
-	<button id="tab1">Wikipedia</button>
-	<button id="tab2"> Flickr</button>
-	<button id="tab3">Twitter</button>
+	<button id="tab0" onclick="allFunction()">ALL</button>
+	<button id="tab1" onclick="wikiFunction()">Wikipedia</button>
+	<button id="tab2" onclick="flickrFunction()">Flickr</button>
+	<button id="tab3" onclick="twitterFunction()">Twitter</button>
 	</div>
 	</center>
 
 	{% if searchText %}
       <div id="flickrElement">
-	  Flickr:
-		<br>
-	  <table>
-	  <tr>
-	  <td>
-	  <img src={{flickrImage}} height="50%" width="50%"></img>
-	  </td>
-	  <td>
-	  <img src={{flickrImage2}} height="50%" width="50%"></img>
-	  </td>
-	  </tr>
-	  </table>
+	  <h1>Flickr</h1>
+	  <br>
+	  
+	  
+	
+		
+	  <img src={{flickrImage}} height="25%" width="25%"></img>
+	  
+	 
+	  <img src={{flickrImage2}} height="25%" width="25%"></img>
+	  
+	  
+	  
 	  </div>
 	  <div id="wikiElement">
-	  Wikipedia:
+	  <h1>Wikipedia</h1>
 	  <br>
-	  <img src={{wikiImage}} height="50%" width="50%"></img>
+	  <img src={{wikiImage}} height="25%" width="25%"></img>
 	  <br>
 
 
 	  {{wikiText}}
 	  </div>
         <div id="twitterElement">
-        {{ twitterText }}
+        <h1>Twitter</h1>
+		<br>
+		{{ twitterText }}
         </div>
 	   {%endif %}
 
+  <script>
+       function flickrFunction(){
+          var w = document.getElementById("wikiElement");
+          var f = document.getElementById("flickrElement");
+          var t = document.getElementById("twitterElement");
+
+           w.style.display = "none";
+           f.style.display = "block"
+           t.style.display = "none";
+
+
+
+      }
+      function wikiFunction(){
+          var w = document.getElementById("wikiElement");
+          var f = document.getElementById("flickrElement");
+          var t = document.getElementById("twitterElement");
+           w.style.display = "block"
+           f.style.display = "none"
+           t.style.display = "none";
+
+      }
+      function twitterFunction(){
+          var w = document.getElementById("wikiElement");
+          var f = document.getElementById("flickrElement");
+          var t = document.getElementById("twitterElement");
+
+           w.style.display = "none"
+           t.style.display = "block"
+           f.style.display = "none"
+
+      }
+function allFunction(){
+          var w = document.getElementById("wikiElement");
+          var f = document.getElementById("flickrElement");
+          var t = document.getElementById("twitterElement");
+
+           w.style.display = "block";
+           f.style.display = "block"
+           t.style.display = "block";
+
+
+
+      }
+  </script>
+  </body>
 </html>
