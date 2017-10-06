@@ -20,8 +20,9 @@ def index():
         searchText = request.form['searchText']
 
         raw_flickr_text,raw_flickr_images = get_result("flickr", searchText)
-        flickrImage = raw_flickr_images[0]
-        flickrImage2 = raw_flickr_images[1]
+        if len(raw_flickr_images) > 2:
+            flickrImage = raw_flickr_images[0]
+            flickrImage2 = raw_flickr_images[1]
 
         wikiText,raw_wiki_images = get_result("wikipedia", searchText)
         wikiImage = raw_wiki_images[0]
