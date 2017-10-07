@@ -1,106 +1,35 @@
-<!DOCTYPE HTML>
-
-<style>
-body{
-background-color: lightBlue;
-}
-</style>
-  <head>
-  
-    <title>Encyclopedia</title>
-  </head>
-  <body>
-    <center>
-	<form method="POST" action="">
-      Enter search term: <input type="text" name="searchText">
-      <input type="submit" name="submit" value="Submit">
-    </form>
-    <br>
-
-	<div>
-	<button id="tab0" onclick="allFunction()">ALL</button>
-	<button id="tab1" onclick="wikiFunction()">Wikipedia</button>
-	<button id="tab2" onclick="flickrFunction()">Flickr</button>
-	<button id="tab3" onclick="twitterFunction()">Twitter</button>
-	</div>
-	</center>
-
-	{% if searchText %}
-      <div id="flickrElement">
-	  <h1>Flickr</h1>
+<DOCTYPEHTML>
+<link rel="stylesheet"
+      type="text/css"
+      href="../static/styles/index.css"/>
+<body>  
+<head>
+<title>
+Wintr
+</title>
+<center>
+<h1>Wintr</h1>
+<br>
+Encyclotainment
+</center>
+</head>
+<span>
+Welcome to Wintr, your one stop shop for what you are searching for.
+<br>
+<br>
+<br>
+<br>
+<form method="POST" action="">
+      Username:<input type="text" name="username">
 	  <br>
-	  
-	  
-	
-		
-	  <img src={{flickrImage}} height="25%" width="25%"></img>
-	  
-	 
-	  <img src={{flickrImage2}} height="25%" width="25%"></img>
-	  
-	  
-	  
-	  </div>
-	  <div id="wikiElement">
-	  <h1>Wikipedia</h1>
-	  <br>
-	  <img src={{wikiImage}} height="25%" width="25%"></img>
-	  <br>
+      Password:<input type="text" name="password">
+      <br>
+	  <input type="submit" name="submit" value="Submit">
+</form>
+<form method="POST" action="">
+    <input type="submit" name="submit" value="Register">
+</form>
+</span>
 
-
-	  {{wikiText}}
-	  </div>
-        <div id="twitterElement">
-        <h1>Twitter</h1>
-		<br>
-		{{ twitterText }}
-        </div>
-	   {%endif %}
-
-  <script>
-       function flickrFunction(){
-          var w = document.getElementById("wikiElement");
-          var f = document.getElementById("flickrElement");
-          var t = document.getElementById("twitterElement");
-
-           w.style.display = "none";
-           f.style.display = "block"
-           t.style.display = "none";
-
-
-
-      }
-      function wikiFunction(){
-          var w = document.getElementById("wikiElement");
-          var f = document.getElementById("flickrElement");
-          var t = document.getElementById("twitterElement");
-           w.style.display = "block"
-           f.style.display = "none"
-           t.style.display = "none";
-
-      }
-      function twitterFunction(){
-          var w = document.getElementById("wikiElement");
-          var f = document.getElementById("flickrElement");
-          var t = document.getElementById("twitterElement");
-
-           w.style.display = "none"
-           t.style.display = "block"
-           f.style.display = "none"
-
-      }
-function allFunction(){
-          var w = document.getElementById("wikiElement");
-          var f = document.getElementById("flickrElement");
-          var t = document.getElementById("twitterElement");
-
-           w.style.display = "block";
-           f.style.display = "block"
-           t.style.display = "block";
-
-
-
-      }
-  </script>
-  </body>
+</body>
 </html>

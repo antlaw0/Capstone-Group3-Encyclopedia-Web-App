@@ -8,7 +8,11 @@ from Results import get_result
 
 
 @app.route('/', methods=['GET', 'POST'])
-def index():
+def index:
+    return render_template('index.html')
+
+@app.route(results'/', methods=['GET', 'POST'])
+def results():
     searchText = None
     wikiImage = None
     wikiText = None
@@ -28,7 +32,7 @@ def index():
 
         twitterText,raw_twitter_images = get_result("twitter", searchText)
 
-    return render_template('index.html', flickrImage=flickrImage, flickrImage2=flickrImage2, wikiText=wikiText,
+    return render_template('results.html', flickrImage=flickrImage, flickrImage2=flickrImage2, wikiText=wikiText,
                            wikiImage=wikiImage, searchText=searchText, twitterText=twitterText)
 
 
