@@ -1,6 +1,6 @@
 from flickrapi import FlickrAPI
 import wikipedia
-from flask import Flask, render_template, flash, session, request
+from flask import Flask, render_template, flash, session, redirect, request
 import models as dbHandler
 import os
 import tweepy
@@ -10,20 +10,39 @@ from Results import get_result
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    wikiText=None
+    twitterText=None
+    searchText=None
+    flickrImage=None
+    flickrImage2=None
+    wikiImage=None
+    
+    message=None
     if request.method=='POST':
         username = request.form['username']
         password = request.form['password']
-        dbHandler.insertUser(username, password)
-        users = dbHandler.retrieveUsers()
-        return render_template('index.html', users=users)
+        #if entered username exists
+        if dbHandler.userExists(username) == True:
+            #if password matches password in database
+            if dbHandler.getPassword(username) == password:
+                return render_template('results.html', flickrImage=flickrImage, flickrImage2=flickrImage2, wikiText=wikiText,
+                           wikiImage=wikiImage, searchText=searchText, twitterText=twitterText, username=username)
+            else:
+                message="Invalid password"
+                return render_template('index.html', message=message)		
+        
+        else:	   
+            message="User does not exist"
+            return render_template('index.html', message=message)		
+        
     else:
-       return render_template('index.html')
+       return render_template('index.html', message=message)
 	
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
     message=None
     #find a way to render results without using all these variables here
-	wikiText=None
+    wikiText=None
     twitterText=None
     searchText=None
     flickrImage=None
@@ -37,10 +56,10 @@ def registration():
             return render_template('registration.html', message=message)
         else:
             #insert new user
-			dbHandler.insertUser(username, password)
-			return render_template('results.html', flickrImage=flickrImage, flickrImage2=flickrImage2, wikiText=wikiText,
-                           wikiImage=wikiImage, searchText=searchText, twitterText=twitterText)
-            return render_template('index.html')
+            dbHandler.insertUser(username, password)
+            return render_template('results.html', flickrImage=flickrImage, flickrImage2=flickrImage2, wikiText=wikiText,
+                           wikiImage=wikiImage, searchText=searchText, twitterText=twitterText, username=username)
+            
     else:
         return render_template('registration.html', message=message)
     

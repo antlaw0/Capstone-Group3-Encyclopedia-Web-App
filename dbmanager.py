@@ -49,6 +49,15 @@ while(running==True):
 		dbhelper.userExists(n)
 	elif cmd == "create":
 		create_database()
+	elif cmd == "password":
+		n=input("Enter username to get password for: ")
+		p= dbhelper.getPassword(n)
+		
+		if dbhelper.getPassword(n)== '12345':
+			print('success')
+		else:
+			print("no")
+			#print(dbhelper.getPassword(n))
 	elif cmd=="insert":
 		dbhelper.insertUser("Anthony","12345")
 		print("User inserted")

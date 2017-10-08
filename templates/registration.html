@@ -3,7 +3,7 @@
       type="text/css"
       href="../static/styles/index.css"/>
 <body>  
-{{message}}
+
 <head>
 <title>
 Wintr
@@ -19,6 +19,9 @@ Encyclotainment
 <br>
 <br>
 <br>
+{% if message %}
+{{message}}
+{% endif %}
 <form method="POST" action="">
       Enter desired Username:
 	  <br>

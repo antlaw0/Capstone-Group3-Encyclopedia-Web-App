@@ -33,3 +33,17 @@ def userExists(uname):
 		print(uname+" found")
 		return True
 	con.close()
+	
+def getPassword(uname):
+	uname=uname
+	con = sql.connect("database.db")
+	c = con.cursor()
+	c.execute("SELECT password FROM users WHERE username = ?", (uname,))
+	#format(tn='users'))
+	data=c.fetchall()
+	d=data[0]
+	#print(data[0])
+	return d[0]
+	con.close()
+	
+	
