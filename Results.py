@@ -34,8 +34,8 @@ def get_result(api_raw, search_text):
         result_images = wikiPage.images
     elif api == 2:
         # Flickr
-        FLICKR_PUBLIC = os.environ['FLICKR_PUBLIC']
-        FLICKR_SECRET = os.environ['FLICKR_SECRET']
+        FLICKR_PUBLIC = '2996c5433c7c633978adb98583ac21fd'
+        FLICKR_SECRET = 'Ydbfbfec07e8f9c22'
         flickr = FlickrAPI(FLICKR_PUBLIC, FLICKR_SECRET, format='parsed-json')
         extras = 'url_c,url_l,url_o'
         results = flickr.photos.getRecent(text=search_text, per_page=25, extras=extras)
