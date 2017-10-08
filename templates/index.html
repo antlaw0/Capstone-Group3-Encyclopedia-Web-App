@@ -1,52 +1,40 @@
-<!DOCTYPE HTML>
+
+<!DOCTYPEHTML>
 <html>
-
-
-  <head>
-    <title>Encyclopedia</title>
-  </head>
-  <body>
-    <center>
-	<form method="POST" action="">
-      Enter search term: <input type="text" name="searchText">
-      <input type="submit" name="submit" value="Submit">
-    </form>
-    <br>
-
-	<div>
-	<button id="tab1">Wikipedia</button>
-	<button id="tab2"> Flickr</button>
-	<button id="tab3">Twitter</button>
-	</div>
-	</center>
-
-	{% if searchText %}
-      <div id="flickrElement">
-	  Flickr:
-		<br>
-	  <table>
-	  <tr>
-	  <td>
-	  <img src={{flickrImage}} height="50%" width="50%"></img>
-	  </td>
-	  <td>
-	  <img src={{flickrImage2}} height="50%" width="50%"></img>
-	  </td>
-	  </tr>
-	  </table>
-	  </div>
-	  <div id="wikiElement">
-	  Wikipedia:
+<link rel="stylesheet"
+      type="text/css"
+      href="../static/styles/index.css"/>
+<body>  
+<head>
+<title>
+Wintr
+</title>
+<center>
+<h1>Wintr</h1>
+<br>
+Encyclotainment
+</center>
+</head>
+<span>
+Welcome to Wintr, your one stop shop for what you are searching for.
+</span>
+<br>
+<br>
+<br>
+<br>
+{% if message%}
+	{{message}}
+	{% endif%}
+<form method="POST" action="/">
+      Username:<input type="text" name="username">
 	  <br>
-	  <img src={{wikiImage}} height="50%" width="50%"></img>
-	  <br>
+      Password:<input type="password" name="password">
+      <br>
+	  <input type="submit" name="submit" value="Submit">
+</form>
+<a href="/registration">Register</a>
 
 
-	  {{wikiText}}
-	  </div>
-        <div id="twitterElement">
-        {{ twitterText }}
-        </div>
-	   {%endif %}
-
+</body>
 </html>
+
