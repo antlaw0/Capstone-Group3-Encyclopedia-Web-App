@@ -38,32 +38,28 @@ def index():
 	
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
-    if not session.get('logged_in'):
-       return "You do not have access to this page"
-    else:
-	
-        message=None
-        #find a way to render results without using all these variables here
-        wikiText=None
-        twitterText=None
-        searchText=None
-        flickrImage=None
-        flickrImage2=None
-        wikiImage=None
-        if request.method=='POST':
-            username = request.form['username']
-            password = request.form['password']
-            if dbHandler.userExists(username) == True:
-                message="UserAlready exists"
-                return render_template('registration.html', message=message)
-            else:
-                #insert new user
-                dbHandler.insertUser(username, password)
-                return render_template('results.html', flickrImage=flickrImage, flickrImage2=flickrImage2, wikiText=wikiText,
-                               wikiImage=wikiImage, searchText=searchText, twitterText=twitterText, username=username)
-            
-        else:
+    message=None
+    #find a way to render results without using all these variables here
+    wikiText=None
+    twitterText=None
+    searchText=None
+    flickrImage=None
+    flickrImage2=None
+    wikiImage=None
+    if request.method=='POST':
+        username = request.form['username']
+        password = request.form['password']
+        if dbHandler.userExists(username) == True:
+            message="UserAlready exists"
             return render_template('registration.html', message=message)
+        else:
+            #insert new user
+            dbHandler.insertUser(username, password)
+            return render_template('results.html', flickrImage=flickrImage, flickrImage2=flickrImage2, wikiText=wikiText,
+                           wikiImage=wikiImage, searchText=searchText, twitterText=twitterText, username=username)
+            
+    else:
+        return render_template('registration.html', message=message)
     
 	
 @app.route('/results', methods=['GET', 'POST'])
