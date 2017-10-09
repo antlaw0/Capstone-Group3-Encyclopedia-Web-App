@@ -31,14 +31,10 @@
 	  <br>
 	  
 	  
-	
+	{% for photo in flickrImageList %}
 		
-	  <img src={{flickrImage}} height="25%" width="25%"></img>
-	  
-	 
-	  <img src={{flickrImage2}} height="25%" width="25%"></img>
-	  
-	  
+	  <img src={{photo}} height="25%" width="25%"></img>
+	{% endfor %}
 	  
 	  </div>
 	  <div id="wikiElement">

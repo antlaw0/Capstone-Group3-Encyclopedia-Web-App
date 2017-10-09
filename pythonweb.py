@@ -75,23 +75,26 @@ def results():
         searchText = None
         wikiImage = None
         wikiText = None
-        flickrImage = None
-        flickrImage2 = None
         twitterText = None
+        photos = []
 
         if request.method == 'POST' and 'searchText' in request.form:
             searchText = request.form['searchText']
 
             raw_flickr_text,raw_flickr_images = get_result("flickr", searchText)
-            flickrImage = raw_flickr_images[0]
-            flickrImage2 = raw_flickr_images[1]
 
+            for index in range (len(raw_flickr_images)):
+                if index == 25:
+                    break
+                flickrImage = raw_flickr_images[index]
+                photos.append(flickrImage)
+            print((photos[0]))
             wikiText,raw_wiki_images = get_result("wikipedia", searchText)
             wikiImage = raw_wiki_images[0]
 
             twitterText,raw_twitter_images = get_result("twitter", searchText)
 
-        return render_template('results.html', flickrImage=flickrImage, flickrImage2=flickrImage2, wikiText=wikiText,
+        return render_template('results.html', flickrImageList = photos, wikiText=wikiText,
                                wikiImage=wikiImage, searchText=searchText, twitterText=twitterText)
     else:
         return redirect('/')

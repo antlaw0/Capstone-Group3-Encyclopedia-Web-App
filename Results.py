@@ -19,10 +19,11 @@ def get_result(api_raw, search_text):
     if api == 0:
         # Twitter
 
-        ACCESS_KEY = os.environ['ACCESS_KEY']
-        ACCESS_SECRET = os.environ['ACCESS_SECRET']
-        CONSUMER_KEY = os.environ['CONSUMER_KEY']
-        CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
+        ACCESS_KEY = '2925298300-BJWap1LPjwmIstGymM8YmatE2SwvIE2VcWCObR0'
+        ACCESS_SECRET = '99x1P3GY71iIQQ82Nqs4pyRas8A4937dgfuX1JHmV6ZH6'
+        CONSUMER_KEY = 'a3Wpz0xL6m14d20vG29wgNcdI'
+        CONSUMER_SECRET = 'BpualGnwqjWTm04YCQvsfDDESZxbtcGhx9vZ0uFdvAqSPqWk5q'
+
 
         auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
         auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
