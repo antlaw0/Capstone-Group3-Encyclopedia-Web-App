@@ -38,14 +38,8 @@ def index():
 	
 @app.route('/registration', methods=['GET', 'POST'])
 def registration():
-    message=None
-    #find a way to render results without using all these variables here
-    wikiText=None
-    twitterText=None
-    searchText=None
-    flickrImage=None
-    flickrImage2=None
-    wikiImage=None
+
+    message = None
     if request.method=='POST':
         username = request.form['username']
         password = request.form['password']
@@ -55,9 +49,8 @@ def registration():
         else:
             #insert new user
             dbHandler.insertUser(username, password)
-            return render_template('results.html', flickrImage=flickrImage, flickrImage2=flickrImage2, wikiText=wikiText,
-                           wikiImage=wikiImage, searchText=searchText, twitterText=twitterText, username=username)
-            
+            session['username'] = username
+            return redirect(url_for('results'))
     else:
         return render_template('registration.html', message=message)
     
@@ -66,14 +59,11 @@ def registration():
 def results():
     if 'username' in session:
         username = session['username']
-
-
         searchText = None
         wikiImage = None
         wikiText = None
         twitterText = None
         photos = []
-
         if request.method == 'POST' and 'searchText' in request.form:
             searchText = request.form['searchText']
 
@@ -91,10 +81,14 @@ def results():
             twitterText,raw_twitter_images = get_result("twitter", searchText)
 
         return render_template('results.html', flickrImageList = photos, wikiText=wikiText,
-                               wikiImage=wikiImage, searchText=searchText, twitterText=twitterText)
+                               wikiImage=wikiImage, searchText=searchText, twitterText=twitterText, username=username)
     else:
         return redirect('/')
-
+@app.route('/logout')
+def logout():
+   # remove the username from the session if it is there
+   session.pop('username', None)
+   return redirect(url_for('index'))
 if __name__ == '__main__':
 	app.secret_key = os.urandom(12)
 	app.run(debug=True)
