@@ -26,8 +26,16 @@ def create_database():
 	c.execute("ALTER TABLE {tn} ADD COLUMN '{cn}' {ct}"\
 			.format(tn=table_name, cn=new_column, ct=column_type))
 	
-	print("Database and table created")
 
+	conn.execute('''CREATE TABLE UserSaves
+	                        (
+	                        id_column INTEGER,
+	                        KeyWord Text,
+	                        TimeStamp DATE,                        
+
+	                        FOREIGN KEY(id_column) REFERENCES users(id_column)
+	                        );''')
+	print("Database and table created")
 	# Committing changes and closing the connection to the database file
 	conn.commit()
 
