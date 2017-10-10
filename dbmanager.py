@@ -50,15 +50,8 @@ def show_entries():
 
 	c.execute("SELECT * FROM users")
 	print(c.fetchall())
-#for testing
-def createSearch():
-	conn = sqlite3.connect('database.db')
-	c = conn.cursor()
 
-	c.execute("INSERT INTO UserSaves (id_column, Keyword, TimeStamp) VALUES (1, 'fish', NULL );")
-	conn.commit()
-	conn.close()
-createSearch()
+
 running=True
 print("Database Manager running. Type \n show: to see the database, \n create: to recreate the database, \n exists: to see if a user exists, \n delete: to delete a user, \n password: to get the password of a user, \n insert: to insert new user  \n showsearches: to show a user's search history \n exit:  to stop the manager.")
 while(running==True):
@@ -92,5 +85,8 @@ while(running==True):
 	elif cmd == "showsearches":
 		n=input("Enter username of user to get search history for: ")
 		dbhelper.showSearches(n)
+	elif cmd =="getId":
+		n=input("Enter username to get ID for: ")
+		print(dbhelper.getId(n))
 	else:
 		print("Command not recognized")

@@ -3,6 +3,7 @@ import wikipedia
 from flask import Flask, render_template, flash, session, redirect, request, url_for
 import models as dbHandler
 import os
+import datetime
 import tweepy
 app = Flask(__name__)
 from Results import get_result
@@ -66,7 +67,9 @@ def results():
         photos = []
         if request.method == 'POST' and 'searchText' in request.form:
             searchText = request.form['searchText']
-
+            t=datetime.datetime.utcnow() #get current time
+            #insert search term and time into searches table in database
+            dbHandler.createSearch(username, searchText, t)
             raw_flickr_text,raw_flickr_images = get_result("flickr", searchText)
 
             for index in range (len(raw_flickr_images)):
@@ -89,11 +92,16 @@ def logout():
    # remove the username from the session if it is there
    session.pop('username', None)
    return redirect(url_for('index'))
+
 @app.route('/user')
 def user():
-    return render_template('userHome.html')
+    if 'username' in session:
+        username=session['username']
+        searchList=dbHandler.showSearches(username)    
+        return render_template('userHome.html', searchList=searchList)
+    else:
+        return render_template('index.html', message=None)
 
 if __name__ == '__main__':
 	app.secret_key = os.urandom(12)
 	app.run(debug=True)
-
