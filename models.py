@@ -34,6 +34,19 @@ def userExists(uname):
 		return True
 	con.close()
 	
+def deleteUser(uname):
+	uname=uname
+	con = sql.connect("database.db")
+	c = con.cursor()
+	if userExists(uname)==True:
+		c.execute("DELETE FROM users WHERE username=?", (uname,))
+		print("User: "+uname+" has been deleted.")
+	else:
+		print("User does not exist.")
+	con.commit()
+	con.close()
+
+	
 def getPassword(uname):
 	uname=uname
 	con = sql.connect("database.db")

@@ -52,7 +52,7 @@ def show_entries():
 	c.execute("SELECT * FROM users")
 	print(c.fetchall())
 running=True
-print("Database Manager running. Type show to see the database, create to recreate the database, and exit to stop the manager.")
+print("Database Manager running. Type \n show: to see the database, \n create: to recreate the database, \n exists: to see if a user exists, \n delete: to delete a user, \n password: to get the password of a user, \n exit:  to stop the manager.")
 while(running==True):
 	cmd=input("Enter command: ")
 	if cmd == "show":
@@ -62,19 +62,22 @@ while(running==True):
 		dbhelper.userExists(n)
 	elif cmd == "create":
 		create_database()
+		
 	elif cmd == "password":
 		n=input("Enter username to get password for: ")
 		p= dbhelper.getPassword(n)
+		print(p)
 		
-		if dbhelper.getPassword(n)== '12345':
-			print('success')
-		else:
-			print("no")
-			#print(dbhelper.getPassword(n))
 	elif cmd=="insert":
 		dbhelper.insertUser("Anthony","12345")
 		print("User inserted")
-	else:
+	
+	elif cmd == "exit":
 		print("Exiting...")
 		running=False
 		break;
+	elif cmd == "delete":
+		n=input("Enter username to delete user: ")
+		dbhelper.deleteUser(n)
+	else:
+		print("Command not recognized")
