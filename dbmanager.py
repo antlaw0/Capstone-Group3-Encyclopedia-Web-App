@@ -38,14 +38,19 @@ def create_database():
 	print("Database and table created")
 	# Committing changes and closing the connection to the database file
 	conn.commit()
-
+#gets users searches
+def showSearches():
+	conn = sqlite3.connect('database.db')
+	c = conn.cursor()
+	username = 'kayla'
+	c.execute("SELECT KeyWord, TimeStamp FROM UserSaves INNER JOIN users ON UserSaves.id_column = users.id_column WHERE username=?",(username))
+	print(c.fetchall())
 def show_entries():
 	conn = sqlite3.connect('database.db')
 	c = conn.cursor()
 
 	c.execute("SELECT * FROM users")
 	print(c.fetchall())
-
 running=True
 print("Database Manager running. Type show to see the database, create to recreate the database, and exit to stop the manager.")
 while(running==True):
