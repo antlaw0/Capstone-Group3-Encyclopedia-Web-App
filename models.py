@@ -1,6 +1,7 @@
 """
-This is a utility to check and modify the database for testing purposes, has no use for end users
-""" 
+This is used to hold database functions
+"""
+
 import sqlite3 as sql
 
 def insertUser(username,password):
@@ -33,6 +34,16 @@ def userExists(uname):
 		print(uname+" found")
 		return True
 	con.close()
+	
+#gets users searches
+def showSearches(uname):
+	uname=uname
+	conn = sql.connect('database.db')
+	c = conn.cursor()
+	username = uname
+	c.execute("SELECT KeyWord, TimeStamp FROM UserSaves INNER JOIN users ON UserSaves.id_column = users.id_column WHERE username=?",(username))
+	print(c.fetchall())
+
 	
 def deleteUser(uname):
 	uname=uname

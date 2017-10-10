@@ -1,3 +1,7 @@
+"""
+This is a utility to check and modify the database for testing purposes, has no use for end users, just for developers
+""" 
+
 import sqlite3
 import models as dbhelper
 
@@ -38,21 +42,18 @@ def create_database():
 	print("Database and table created")
 	# Committing changes and closing the connection to the database file
 	conn.commit()
-#gets users searches
-def showSearches():
-	conn = sqlite3.connect('database.db')
-	c = conn.cursor()
-	username = 'kayla'
-	c.execute("SELECT KeyWord, TimeStamp FROM UserSaves INNER JOIN users ON UserSaves.id_column = users.id_column WHERE username=?",(username))
-	print(c.fetchall())
+
+#prints all user data in users table
 def show_entries():
 	conn = sqlite3.connect('database.db')
 	c = conn.cursor()
 
 	c.execute("SELECT * FROM users")
 	print(c.fetchall())
+
+
 running=True
-print("Database Manager running. Type \n show: to see the database, \n create: to recreate the database, \n exists: to see if a user exists, \n delete: to delete a user, \n password: to get the password of a user, \n exit:  to stop the manager.")
+print("Database Manager running. Type \n show: to see the database, \n create: to recreate the database, \n exists: to see if a user exists, \n delete: to delete a user, \n password: to get the password of a user, \n insert: to insert new user  \n showsearches: to show a user's search history \n exit:  to stop the manager.")
 while(running==True):
 	cmd=input("Enter command: ")
 	if cmd == "show":
@@ -69,8 +70,10 @@ while(running==True):
 		print(p)
 		
 	elif cmd=="insert":
-		dbhelper.insertUser("Anthony","12345")
-		print("User inserted")
+		n=input("Enter username of user to insert: ")
+		p=input("Enter password of user to insert: ")
+		dbhelper.insertUser(n,p)
+		print("User "+n+" with password: "+p+" inserted")
 	
 	elif cmd == "exit":
 		print("Exiting...")
@@ -79,5 +82,8 @@ while(running==True):
 	elif cmd == "delete":
 		n=input("Enter username to delete user: ")
 		dbhelper.deleteUser(n)
+	elif cmd == "showsearches":
+		n=input("Enter username of user to get search history for: ")
+		dbhelper.showSearches(n)
 	else:
 		print("Command not recognized")
