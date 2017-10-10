@@ -41,7 +41,7 @@ def showSearches(uname):
 	conn = sql.connect('database.db')
 	c = conn.cursor()
 	username = uname
-	c.execute("SELECT KeyWord, TimeStamp FROM UserSaves INNER JOIN users ON UserSaves.id_column = users.id_column WHERE username=?",(username))
+	c.execute("SELECT KeyWord, TimeStamp FROM UserSaves INNER JOIN users ON UserSaves.id_column = users.id_column WHERE username=?",(username,))
 	print(c.fetchall())
 
 	
