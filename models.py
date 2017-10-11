@@ -95,8 +95,9 @@ def createSearch(uname, searchTerm, time):
 	conn = sql.connect('database.db')
 	c = conn.cursor()
 
-	c.execute("INSERT INTO UserSaves (id_column, Keyword, TimeStamp) VALUES (uid, searchTerm, time );")
+	c.execute("INSERT INTO UserSaves (id_column, Keyword, TimeStamp) VALUES (?, ?, ?)",(uid, searchTerm, time,))
 	conn.commit()
 	conn.close()
-
+#test
+createSearch('Kayla', 'cat', 2017-10-10)
 	
