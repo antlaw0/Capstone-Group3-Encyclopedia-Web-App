@@ -3,11 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>User Home </title>
+    <link rel="stylesheet"
+      type="text/css"
+      href="../static/styles/userStyles.css"/>
 </head>
 <body>
-<a href = '/results'>Search</a>
-<a href = '/logout'>click here to log out</a>
-Recent Searches:
+<p><a href = '/results'>Continue to search page</a></p>
+<p>Click <a href = '/logout'>here</a> to log out</p>
+<center><H1>Saved User Searches</H1></center>
+
+<br>
+
+<p>Click <a href = '/delete'>here</a> to delete all searches</p>
+
+<h3>Recent Searches:</h3>
 <br>
 <table>
 {% for searches in searchList %}
@@ -23,5 +32,4 @@ Recent Searches:
 <br>
 {% endfor %}
 </body>
-<a href = '/delete'>click here to delete all searches</a>
 </html>

@@ -8,17 +8,21 @@
     <title>Encyclopedia</title>
 	<center> Logged in as {{username}}
 		</center>
-		<b>
-			<a href='/user'>Search history</a>
-			<a href = '/logout'>click here to log out</a></b>
 
   </head>
   <body>
+  <p><a href = '/user'>Back</a> to search page</p>
+<p>Click <a href = '/logout'>here</a> to log out</p>
+  <br>
+  <h1>Search the Web</h1>
+  <div>
     <center>
 	<form method="POST" action="">
       Enter search term: <input type="text" name="searchText">
       <input type="submit" name="submit" value="Submit">
 	</form>
+	</center>
+		</div>
 	{% if searchText %}
 		<br>
 
@@ -29,7 +33,7 @@
 	{%endif %}
 
     <br>
-
+<center>
 	<div>
 	<button id="tab0" onclick="allFunction()">ALL</button>
 	<button id="tab1" onclick="wikiFunction()">Wikipedia</button>
