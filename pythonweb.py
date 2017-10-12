@@ -104,10 +104,10 @@ def saveSearch():
     username = session['username']
     dbHandler.createSearch(username, searchText, date)
     return redirect(url_for('results'))
-@app.route('/deleate')
-def deleateSearches():
+@app.route('/delete')
+def deleteSearches():
     username = session['username']
-    dbHandler.deleateSearches(username)
+    dbHandler.deleteSearches(username)
     return redirect(url_for('results'))
 
 if __name__ == '__main__':

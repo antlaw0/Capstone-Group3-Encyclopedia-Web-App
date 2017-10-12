@@ -98,7 +98,7 @@ def createSearch(uname, searchTerm, time):
 	c.execute("INSERT INTO UserSaves (id_column, Keyword, TimeStamp) VALUES (?, ?, ?)",(uid, searchTerm, time,))
 	conn.commit()
 	conn.close()
-def deleateSearches(uname):
+def deleteSearches(uname):
 	conn = sql.connect('database.db')
 	c = conn.cursor()
 	uid = getId(uname)
