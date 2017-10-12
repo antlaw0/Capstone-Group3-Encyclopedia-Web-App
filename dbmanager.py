@@ -50,7 +50,12 @@ def show_entries():
 
 	c.execute("SELECT * FROM users")
 	print(c.fetchall())
+def deleateSearches():
+	conn = sqlite3.connect('database.db')
+	c = conn.cursor()
 
+	c.execute("SELECT * FROM users")
+	print(c.fetchall())
 
 running=True
 print("Database Manager running. Type \n show: to see the database, \n create: to recreate the database, \n exists: to see if a user exists, \n delete: to delete a user, \n password: to get the password of a user, \n insert: to insert new user  \n showsearches: to show a user's search history \n exit:  to stop the manager.")

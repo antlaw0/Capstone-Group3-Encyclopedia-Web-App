@@ -98,6 +98,12 @@ def createSearch(uname, searchTerm, time):
 	c.execute("INSERT INTO UserSaves (id_column, Keyword, TimeStamp) VALUES (?, ?, ?)",(uid, searchTerm, time,))
 	conn.commit()
 	conn.close()
-#test
-createSearch('Kayla', 'cat', 2017-10-10)
+def deleateSearches(uname):
+	conn = sql.connect('database.db')
+	c = conn.cursor()
+	uid = getId(uname)
+	c.execute("DELETE FROM UserSaves WHERE id_column = ?", (uid,))
+	conn.commit()
+	conn.close()
+
 	

@@ -51,7 +51,7 @@ def registration():
             #insert new user
             dbHandler.insertUser(username, password)
             session['username'] = username
-            return redirect(url_for('results'))
+            return redirect(url_for('user'))
     else:
         return render_template('registration.html', message=message)
     
@@ -67,11 +67,7 @@ def results():
         photos = []
         if request.method == 'POST' and 'searchText' in request.form:
             searchText = request.form['searchText']
-            t=datetime.datetime.utcnow() #get current time
-            #insert search term and time into searches table in database
-            dbHandler.createSearch(username, searchText, t)
             raw_flickr_text,raw_flickr_images = get_result("flickr", searchText)
-
             for index in range (len(raw_flickr_images)):
                 if index == 25:
                     break
@@ -101,6 +97,18 @@ def user():
         return render_template('userHome.html', searchList=searchList)
     else:
         return render_template('index.html', message=None)
+@app.route('/save', methods=['POST'])
+def saveSearch():
+    searchText = request.form['searchText']
+    date = datetime.datetime.now()
+    username = session['username']
+    dbHandler.createSearch(username, searchText, date)
+    return redirect(url_for('results'))
+@app.route('/deleate')
+def deleateSearches():
+    username = session['username']
+    dbHandler.deleateSearches(username)
+    return redirect(url_for('results'))
 
 if __name__ == '__main__':
 	app.secret_key = os.urandom(12)
