@@ -20,17 +20,23 @@ Encyclotainment
 <br>
 <br>
 <br>
-{% if message %}
+{% for message in messages %}
 {{message}}
-{% endif %}
+<br>
+{% endfor %}
+<br>
 <form method="POST" action="">
       Enter desired Username:
 	  <br>
-	  <input type="text" name="username">
+	  <input type="text" name="username" id="username">
+	  <br>
+	  (usernames must be between 8 and 20 characters in length)
 	  <br>
       Enter Password:
 	  <br>
-	  <input type="password" name="password">
+	  <input type="password" name="password" id="password">
+	  <br>
+	  (passwords must be between 8 and 20 characters in length)
       <br>
 	  <input type="submit" name="submit" value="Register">
 </form>
