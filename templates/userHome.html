@@ -22,10 +22,17 @@
 {% for searches in searchList %}
 <tr>
 <td>
+
 {{searches[0]}}     
 </td>
 <td>
 {{searches[1]}}
+</td>
+<td>
+<form method="POST" action="">
+<input type="hidden" name='searchTerm' value={{searches[0]}}></input>
+<button type="submit">Search</button>
+</form>
 </td>
 </tr>
     </table>

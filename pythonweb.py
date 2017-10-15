@@ -81,6 +81,7 @@ def results():
         username = session['username']
         searchText = None
         wikiImage = None
+        searchTerm=None
         wikiText = None
         twitterText = None
         photos = []
@@ -99,7 +100,7 @@ def results():
             twitterText,raw_twitter_images = get_result("twitter", searchText)
 
         return render_template('results.html', flickrImageList = photos, wikiText=wikiText,
-                               wikiImage=wikiImage, searchText=searchText, twitterText=twitterText, username=username)
+                               wikiImage=wikiImage, searchText=searchText, twitterText=twitterText, username=username, searchTerm=searchTerm)
     else:
         return redirect('/')
 @app.route('/logout')
@@ -108,9 +109,35 @@ def logout():
    session.pop('username', None)
    return redirect(url_for('index'))
 
-@app.route('/user')
+@app.route('/user', methods=['GET', 'POST'])
 def user():
+    searchText=None
+    searchTerm=None
+    photos=[]
+    twitterText=None
+    flickrImage=None
+    wikiImage=None
+    wikiText=None
     if 'username' in session:
+        username=session['username']
+        
+        #if clicked search button on previously searched term
+        if request.method=='POST':
+            searchTerm = request.form['searchTerm'] #get search term from table
+            searchText=searchTerm
+            #have search term from form, use it in render results page
+            raw_flickr_text,raw_flickr_images = get_result("flickr", searchText)
+            for index in range (len(raw_flickr_images)):
+                if index == 25:
+                    break
+                flickrImage = raw_flickr_images[index]
+                photos.append(flickrImage)
+            print((photos[0]))
+            wikiText,raw_wiki_images = get_result("wikipedia", searchText)
+            wikiImage = raw_wiki_images[0]
+            twitterText,raw_twitter_images = get_result("twitter", searchText)
+            return render_template('results.html', flickrImageList = photos, wikiText=wikiText,
+                               wikiImage=wikiImage, searchText=searchText, twitterText=twitterText, username=username, searchTerm=searchTerm)
         username=session['username']
         searchList=dbHandler.showSearches(username)    
         return render_template('userHome.html', searchList=searchList)
