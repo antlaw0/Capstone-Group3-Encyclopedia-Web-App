@@ -29,9 +29,13 @@ def get_result(api_raw, search_text):
         auth.set_access_token(ACCESS_KEY, ACCESS_SECRET)
         api = tweepy.API(auth)
         twitter_search = api.search(search_text)
-
+        index = 0
         for result in twitter_search:
-            result_text.append(result.text)
+            if index <10:
+                result_text.append(result.text)
+                index += 1
+
+
     elif api == 1:
         # Wikipedia
         wikiPage = wikipedia.page(search_text)

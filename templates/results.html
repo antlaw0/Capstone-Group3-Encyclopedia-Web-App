@@ -71,7 +71,10 @@
         <div id="twitterElement">
         <h1>Twitter</h1>
 		<br>
-		{{ twitterText }}
+
+			{% for tweet in twitterText %}
+			<p>{{tweet}}</p>
+			{% endfor %}
         </div>
 	   {%endif %}
 
@@ -82,7 +85,7 @@
           var t = document.getElementById("twitterElement");
 
            w.style.display = "none";
-           f.style.display = "block"
+           f.style.display = "block";
            t.style.display = "none";
 
 
