@@ -38,9 +38,20 @@ def get_result(api_raw, search_text):
 
     elif api == 1:
         # Wikipedia
-        wikiPage = wikipedia.page(search_text)
-        result_text = wikiPage.summary
-        result_images = wikiPage.images
+        try:
+            wikiPage = wikipedia.page(search_text)
+            result_text = wikiPage.summary
+            result_images = wikiPage.images
+        #handles if a search term could have more than one result, chooses the first suggested one
+        except wikipedia.exceptions.DisambiguationError as e:
+            print(e.options)
+            search_text = e.options[0]
+            print(search_text)
+            wikiPage = wikipedia.page(search_text)
+            result_text = wikiPage.summary
+            result_images = wikiPage.images
+
+
     elif api == 2:
         # Flickr
         FLICKR_PUBLIC = '2996c5433c7c633978adb98583ac21fd'

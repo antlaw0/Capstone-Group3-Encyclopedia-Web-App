@@ -95,7 +95,8 @@ def results():
                 photos.append(flickrImage)
             print((photos[0]))
             wikiText,raw_wiki_images = get_result("wikipedia", searchText)
-            wikiImage = raw_wiki_images[0]
+            if len(raw_wiki_images) > 0:
+                wikiImage = raw_wiki_images[0]
 
             twitterText,raw_twitter_images = get_result("twitter", searchText)
 
@@ -134,7 +135,8 @@ def user():
                 photos.append(flickrImage)
             print((photos[0]))
             wikiText,raw_wiki_images = get_result("wikipedia", searchText)
-            wikiImage = raw_wiki_images[0]
+            if len(raw_wiki_images) > 0:
+                wikiImage = raw_wiki_images[0]
             twitterText,raw_twitter_images = get_result("twitter", searchText)
             return render_template('results.html', flickrImageList = photos, wikiText=wikiText,
                                wikiImage=wikiImage, searchText=searchText, twitterText=twitterText, username=username, searchTerm=searchTerm)
