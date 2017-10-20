@@ -5,3 +5,11 @@ h1 {
     color: darkslategrey;
     font-family: Verdana;
 }
+h3 {
+    font-family: cursive;
+    color: coral;
+}
+td {
+    font-family: sans-serif;
+    color: crimson;
+}
