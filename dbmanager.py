@@ -17,7 +17,15 @@ def create_database():
 	# Creating a new SQLite table 
 	c.execute('CREATE TABLE {tn} ({nf} {ft})'\
 			.format(tn=table_name, nf=id_column, ft='INTEGER PRIMARY KEY AUTOINCREMENT'))
+	
+	#add email  column
+	new_column='email'
+	column_type='TEXT'
+	c.execute("ALTER TABLE {tn} ADD COLUMN '{cn}' {ct}"\
+			.format(tn=table_name, cn=new_column, ct=column_type))
 
+			
+			
 	#add next column
 	new_column='username'
 	column_type='TEXT'

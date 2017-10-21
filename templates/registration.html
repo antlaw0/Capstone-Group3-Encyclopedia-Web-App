@@ -26,15 +26,19 @@ Encyclotainment
 {% endfor %}
 <br>
 <form method="POST" action="">
-      Enter desired Username:
+      Enter E-mail address:  
 	  <br>
-	  <input type="text" name="username" id="username">
+	  <input type="email" id="email" name="email" required></input>
 	  <br>
-	  (usernames must be between 8 and 20 characters in length)
+	  Enter desired Username:
+	  <br>
+	  <input type="text" name="username" id="username" required>
+	  <br>
+	  (usernames must be  under 20 characters in length)
 	  <br>
       Enter Password:
 	  <br>
-	  <input type="password" name="password" id="password" onkeyup="return passwordChanged();">
+	  <input type="password" name="password" id="password" onkeyup="return passwordChanged();" required>
 	  <span id="strength">Type Password</span>
 
 	  <br>

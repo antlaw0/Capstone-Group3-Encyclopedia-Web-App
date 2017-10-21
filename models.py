@@ -4,13 +4,14 @@ This is used to hold database functions
 
 import sqlite3 as sql
 
-def insertUser(username,password):
+def insertUser(email, username,password):
     con = sql.connect("database.db")
     cur = con.cursor()
-    cur.execute("INSERT INTO users (username,password) VALUES (?,?)", (username,password))
+    cur.execute("INSERT INTO users (email, username, password) VALUES (?,?, ?)", (email, username,password))
     con.commit()
     con.close()
 
+	
 def retrieveUsers():
 	con = sql.connect("database.db")
 	cur = con.cursor()
@@ -21,52 +22,52 @@ def retrieveUsers():
 
 
 	
-#This method takes a string and returns whether or not a user with the username enter exists
-def userExists(uname):
-	uname=uname
+#This method takes a string and returns whether or not a user with the email enter exists
+def userExists(email):
+	email=email
 	con = sql.connect("database.db")
 	c = con.cursor()
-	c.execute("SELECT username FROM users WHERE username = ?", (uname,))
+	c.execute("SELECT email FROM users WHERE email = ?", (email,))
 	#format(tn='users'))
 	data=c.fetchall()
 	if len(data)==0:
-		print(uname+" not found")
+		print("User with e-mial "+email+" not found")
 		return False
 	else:
-		print(uname+" found")
+		print("User with e-mail "+email+" found")
 		return True
 	con.close()
 	
 #gets users searches, returns list of searches
-def showSearches(uname):
-	uname=uname
+def showSearches(email):
+	
 	conn = sql.connect('database.db')
 	c = conn.cursor()
-	username = uname
-	c.execute("SELECT KeyWord, TimeStamp FROM UserSaves INNER JOIN users ON UserSaves.id_column = users.id_column WHERE username=?",(username,))
+	
+	c.execute("SELECT KeyWord, TimeStamp FROM UserSaves INNER JOIN users ON UserSaves.id_column = users.id_column WHERE email=?",(email,))
 	searchList=list(c.fetchall())
 	print(searchList)
 	return searchList
 
 	
-def deleteUser(uname):
-	uname=uname
+def deleteUser(email):
+	
 	con = sql.connect("database.db")
 	c = con.cursor()
-	if userExists(uname)==True:
-		c.execute("DELETE FROM users WHERE username=?", (uname,))
-		print("User: "+uname+" has been deleted.")
+	if userExists(email)==True:
+		c.execute("DELETE FROM users WHERE username=?", (email,))
+		print("User with email "+email+" has been deleted.")
 	else:
 		print("User does not exist.")
 	con.commit()
 	con.close()
 
 	
-def getPassword(uname):
-	uname=uname
+def getPassword(email):
+	email=email
 	con = sql.connect("database.db")
 	c = con.cursor()
-	c.execute("SELECT password FROM users WHERE username = ?", (uname,))
+	c.execute("SELECT password FROM users WHERE email = ?", (email,))
 	#format(tn='users'))
 	data=c.fetchall()
 	d=data[0]
@@ -74,22 +75,35 @@ def getPassword(uname):
 	return d[0]
 	con.close()
 
-#returns the ID of a given username
-def getId(uname):
-	uname=uname
+def getUsername(email):
+	email=email
 	con = sql.connect("database.db")
 	c = con.cursor()
-	c.execute("SELECT id_column FROM users WHERE username = ?", (uname,))
+	c.execute("SELECT username FROM users WHERE email = ?", (email,))
+	#format(tn='users'))
 	data=c.fetchall()
 	d=data[0]
 	#print(data[0])
 	return d[0]
 	con.close()
 
+	
+#returns the ID of a given email
+def getId(email):
+	
+	con = sql.connect("database.db")
+	c = con.cursor()
+	c.execute("SELECT id_column FROM users WHERE email = ?", (email,))
+	data=c.fetchall()
+	d=data[0]
+	#print("ID: "+str(d[0]))
+	return d[0]
+	con.close()
+
 #inserts a search
-def createSearch(uname, searchTerm, time):
-	uname=uname
-	uid=getId(uname)
+def createSearch(email, searchTerm, time):
+	
+	uid=getId(email)
 	searchTerm=searchTerm
 	time=time
 	conn = sql.connect('database.db')
@@ -98,10 +112,10 @@ def createSearch(uname, searchTerm, time):
 	c.execute("INSERT INTO UserSaves (id_column, Keyword, TimeStamp) VALUES (?, ?, ?)",(uid, searchTerm, time,))
 	conn.commit()
 	conn.close()
-def deleteSearches(uname):
+def deleteSearches(email):
 	conn = sql.connect('database.db')
 	c = conn.cursor()
-	uid = getId(uname)
+	uid = getId(email)
 	c.execute("DELETE FROM UserSaves WHERE id_column = ?", (uid,))
 	conn.commit()
 	conn.close()
