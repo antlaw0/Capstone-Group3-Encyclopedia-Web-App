@@ -1,4 +1,4 @@
-
+import mail
 from flickrapi import FlickrAPI
 import wikipedia
 from flask import Flask, render_template, flash, session, redirect, request, url_for
@@ -49,7 +49,11 @@ def registration():
         email=request.form['email']
         username = request.form['username']
         password = request.form['password']
-		
+        password2=request.form['password2']
+        #check if password and re-entered passwords match
+        if password != password2:
+            messages.append("Invallid password- passwords do not match. Please re-enter password")
+            
         #check username length
         if len(username) < 1:
             messages.append("Invallid username")
@@ -167,6 +171,24 @@ def deleteSearches():
     dbHandler.deleteSearches(username)
     return redirect(url_for('results'))
 
+@app.route('/forgotPassword', methods=['GET', 'POST'])
+def forgotPassword():
+    messages=[]
+    if request.method=='POST':
+        email=request.form['email']
+        if dbHandler.userExists(email)==True:
+            #send e-mail reminding of password for user
+            mail.sendPasswordEmail(email)
+            messages.append("An e-mail with your password has been sent to your e-mail address.")
+            return render_template('forgotPassword.html', messages=messages)
+        else:
+            messages.append("No user with the entered e-mail exists.")
+            return render_template('forgotPassword.html', messages=messages)
+    return render_template("forgotPassword.html", messages=messages)
+        
+    
+
+	
 if __name__ == '__main__':
 	app.secret_key = os.urandom(12)
 	app.run(debug=True)

@@ -88,6 +88,19 @@ def getUsername(email):
 	con.close()
 
 	
+def getUsername(email):
+	email=email
+	con = sql.connect("database.db")
+	c = con.cursor()
+	c.execute("SELECT username FROM users WHERE email = ?", (email,))
+	#format(tn='users'))
+	data=c.fetchall()
+	d=data[0]
+	#print(data[0])
+	return d[0]
+	con.close()
+
+	
 #returns the ID of a given email
 def getId(email):
 	
