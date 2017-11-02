@@ -52,19 +52,19 @@ def registration():
         password2=request.form['password2']
         #check if password and re-entered passwords match
         if password != password2:
-            messages.append("Invallid password- passwords do not match. Please re-enter password")
+            messages.append("Invalid password- passwords do not match. Please re-enter password")
             
         #check username length
         if len(username) < 1:
-            messages.append("Invallid username")
+            messages.append("Invalid username")
         if len(username) > 20:
-            messages.append("Invallid username- The entered username is too long. Usernames must be 20 characters or less in length.")
+            messages.append("Invalid username- The entered username is too long. Usernames must be 20 characters or less in length.")
         
         #check password length
         if len(password) < 8:
-            messages.append("Invallid password- passwords must be at least 8 characters long.")
+            messages.append("Invalid password- passwords must be at least 8 characters long.")
         if len(password) > 20:
-            messages.append("Invallid password- The password you entered is too long. Passwords must not be longer than 20 characters in length.")
+            messages.append("Invalid password- The password you entered is too long. Passwords must not be longer than 20 characters in length.")
         
         #if no error messages
         if len(messages) != 0:

@@ -1,3 +1,4 @@
+#unit testing based on old database
 import unittest
 import models
 class TestDBhelper(unittest.TestCase):
@@ -11,3 +12,4 @@ class TestDBhelper(unittest.TestCase):
         self.assertEqual(result, 2)
 if __name__ == '__main__':
     unittest.main()
+
