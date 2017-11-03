@@ -123,6 +123,7 @@ def logout():
 
 @app.route('/user', methods=['GET', 'POST'])
 def user():
+
     searchText=None
     searchTerm=None
     photos=[]
@@ -154,7 +155,7 @@ def user():
         email=session['email']
         username=session['username']
         searchList=dbHandler.showSearches(email)    
-        return render_template('userHome.html', searchList=searchList)
+        return render_template('userHome.html', searchList=searchList, username=username)
     else:
         return render_template('index.html', message=None)
 @app.route('/save', methods=['POST'])

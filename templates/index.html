@@ -3,22 +3,27 @@
 <link rel="stylesheet"
       type="text/css"
       href="../static/styles/index.css"/>
-<body>  
+
+<div class="head">
     <head>
         <title>
         Wintr
         </title>
     <center>
-        <h1>Wintr</h1>
+
+             <h1>Wintr</h1>
+
     </center>
     </head>
+     </div>
 <span>
     <center>
         <h2><b><i>Wintr Encyclotainment</i></b></h2>
         <p> The one-stop shop for all of your entertainment and information needs</p>
     </center>
 </span>
-
+<div class="signin">
+    <p>Sign in to access your account and search page</p>
 {% if message%}
 	{{message}}
 	{% endif%}
@@ -31,5 +36,7 @@
 </form>
 <a href="/forgotPassword">Forgot password</a>
 <a href="/registration">Register</a>
+</div>
+
 </body>
 </html>

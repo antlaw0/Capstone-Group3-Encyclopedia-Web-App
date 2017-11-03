@@ -31,22 +31,22 @@
 	{% if searchText %}
 		<br>
 
+<center>
+	<div>
+		<p>Click the save button to save searches to your profile</p>
 		<form method="POST" action="/save">
 			<input type="hidden" name="searchText" value="{{searchText}}">
 			<input type="submit" name="save" value="Save Search">
 		</form>
-	{%endif %}
+		<p>Select search options to filter results</p>
 
-    <br>
-<center>
-	<div>
 	<button id="tab0" onclick="allFunction()">ALL</button>
 	<button id="tab1" onclick="wikiFunction()">Wikipedia</button>
 	<button id="tab2" onclick="flickrFunction()">Flickr</button>
 	<button id="tab3" onclick="twitterFunction()">Twitter</button>
 	</div>
 	</center>
-
+{%endif %}
 	{% if searchText %}
       <div id="flickrElement">
 	  <h1>Flickr</h1>
