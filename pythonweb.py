@@ -163,13 +163,13 @@ def saveSearch():
     searchText = request.form['searchText']
     date = datetime.datetime.now()
     email=session['email']
-    username = session['username']
+
     dbHandler.createSearch(email, searchText, date)
     return redirect(url_for('results'))
 @app.route('/delete')
 def deleteSearches():
-    username = session['username']
-    dbHandler.deleteSearches(username)
+    email=session['email']
+    dbHandler.deleteSearches(email)
     return redirect(url_for('results'))
 
 @app.route('/forgotPassword', methods=['GET', 'POST'])
