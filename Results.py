@@ -19,10 +19,10 @@ def get_result(api_raw, search_text):
     if api == 0:
         # Twitter
 
-        ACCESS_KEY = '2925298300-BJWap1LPjwmIstGymM8YmatE2SwvIE2VcWCObR0'
-        ACCESS_SECRET = '99x1P3GY71iIQQ82Nqs4pyRas8A4937dgfuX1JHmV6ZH6'
-        CONSUMER_KEY = 'a3Wpz0xL6m14d20vG29wgNcdI'
-        CONSUMER_SECRET = 'BpualGnwqjWTm04YCQvsfDDESZxbtcGhx9vZ0uFdvAqSPqWk5q'
+        ACCESS_KEY = os.environ.get('ACCESS_KEY')
+        ACCESS_SECRET = os.environ.get('ACCESS_SECRET')
+        CONSUMER_KEY = os.environ.get('CONSUMER_KEY')
+        CONSUMER_SECRET = os.environ.get('CONSUMER_SECRET')
 
 
         auth = tweepy.OAuthHandler(CONSUMER_KEY, CONSUMER_SECRET)
@@ -54,8 +54,8 @@ def get_result(api_raw, search_text):
 
     elif api == 2:
         # Flickr
-        FLICKR_PUBLIC = '2996c5433c7c633978adb98583ac21fd'
-        FLICKR_SECRET = 'Ydbfbfec07e8f9c22'
+        FLICKR_PUBLIC = os.environ.get('FLICKR_PUBLIC')
+        FLICKR_SECRET = os.environ.get('FLICKR_SECRET')
         flickr = FlickrAPI(FLICKR_PUBLIC, FLICKR_SECRET, format='parsed-json')
         extras = 'url_c,url_l,url_o'
         results = flickr.photos.search(tags=search_text, per_page=25, extras=extras)

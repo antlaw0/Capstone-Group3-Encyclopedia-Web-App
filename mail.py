@@ -7,7 +7,7 @@ import models as dbHandler
 
 def sendPasswordEmail(receiverEmail):
 	sender = "wintrteam@gmail.com"
-	sender_password = "Capstone2905"#os.environ.get('WINTR_EMAIL_PASSWORD')
+	sender_password = os.environ.get('WINTR_EMAIL_PASSWORD')
 	receiver = receiverEmail
 	username=dbHandler.getUsername(receiver)
 	password=dbHandler.getPassword(receiver)
